@@ -13,12 +13,14 @@ epm:install &silent-if-installed=$true github.com/ejrichards/mellon
 
 ## NixOS
 
-`/etc/nixos/flake.nix`
+`flake.nix` supplies a NixOS module that lets you import in the same manner as `epm`
+
 ```nix
 {
   inputs = {
     mellon.url = "github:ejrichards/mellon";
   };
+
   outputs = {
     mellon,
     ...
@@ -34,5 +36,8 @@ epm:install &silent-if-installed=$true github.com/ejrichards/mellon
 ```
 
 # Usage
+## TODO
 
-TODO
+```elvish
+use github.com/ejrichards/mellon/<module>
+```
