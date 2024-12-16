@@ -1,7 +1,7 @@
 use str
 use store
 
-fn history {|&exact=$true &edit-key='tab' &delete-key='ctrl-d' &border='rounded' &down-exit=$true|
+fn history {|&edit-key='tab' &delete-key='ctrl-d' &down-exit=$true @argv|
 	tmp E:SHELL = 'elvish'
 
 	var fzf-args = [
@@ -11,8 +11,8 @@ fn history {|&exact=$true &edit-key='tab' &delete-key='ctrl-d' &border='rounded'
 		--print0
 		--info-command="print History"
 		--scheme=history
-		--border=$border
-		--query=$edit:current-command 
+		--query=$edit:current-command
+		$@argv
 	]
 
 	if (not-eq $edit-key $nil) {
@@ -20,9 +20,6 @@ fn history {|&exact=$true &edit-key='tab' &delete-key='ctrl-d' &border='rounded'
 	}
 	if (not-eq $delete-key $nil) {
 		set fzf-args = [$@fzf-args --expect=$delete-key]
-	}
-	if $exact {
-		set fzf-args = [$@fzf-args --exact]
 	}
 	if $down-exit {
 		set fzf-args = [$@fzf-args --bind 'down:transform:if (<= $E:FZF_POS 1) { print abort } else { print down }']
