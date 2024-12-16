@@ -1,5 +1,4 @@
-# mellon
-## Speak, friend, and enter 
+# mellon - Speak, friend, and enter
 
 Modules for [Elvish Shell](https://github.com/elves/elvish)
 
