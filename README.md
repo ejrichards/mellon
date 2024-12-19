@@ -16,15 +16,6 @@ epm:install &silent-if-installed=$true github.com/ejrichards/mellon
 
 ```nix
 {
-  inputs = {
-    mellon.url = "github:ejrichards/mellon";
-  };
-
-  outputs = {
-    mellon,
-    ...
-  }:
-  {
     ...
     nixosConfigurations = {
       modules = [
@@ -38,6 +29,17 @@ epm:install &silent-if-installed=$true github.com/ejrichards/mellon
 
 ```elvish
 use github.com/ejrichards/mellon/<module>
+```
+
+## `atuin.elv`
+
+Add bindings for `Ctrl-r` and `Up` to use atuin for searching history.
+```elvish
+if (has-external atuin) {
+	use github.com/ejrichards/mellon/atuin
+	set edit:insert:binding[Ctrl-r] = { atuin:search }
+	set edit:insert:binding[Up] = { atuin:search-up }
+}
 ```
 
 ## `fzf.elv`
