@@ -26,9 +26,14 @@ set edit:after-command = [$@edit:after-command {|m|
 		}
 		var duration = (exact-num (math:round (* $m[duration] 1000000000)))
 
-		with E:ATUIN_LOG = 'error' { atuin history end --exit $exit-status --duration=$duration -- $E:ATUIN_HISTORY_ID >$os:dev-null 2>&1 & }
+		var history-end = {
+			tmp E:ATUIN_LOG = 'error'
+			atuin history end --exit $exit-status --duration $duration -- $E:ATUIN_HISTORY_ID >$os:dev-null 2>&1
+			unset-env ATUIN_HISTORY_ID
+		}
 
-		unset-env ATUIN_HISTORY_ID
+		# TODO: Add option to not background for use with `$notify-bg-job-success`?
+		$history-end &
 	}
 }]
 
