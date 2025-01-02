@@ -8,7 +8,9 @@ unset-env ATUIN_HISTORY_ID
 
 set edit:after-readline = [$@edit:after-readline {|line|
 	try {
-		set-env ATUIN_HISTORY_ID (atuin history start -- $line)
+		if (not-eq (str:trim-space $line) '') {
+			set-env ATUIN_HISTORY_ID (atuin history start -- $line)
+		}
 	} catch e {
 		unset-env ATUIN_HISTORY_ID
 	}
