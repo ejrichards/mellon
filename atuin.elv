@@ -34,8 +34,11 @@ set edit:after-command = [$@edit:after-command {|m|
 			unset-env ATUIN_HISTORY_ID
 		}
 
-		# TODO: Add option to not background for use with `$notify-bg-job-success`?
-		$history-end &
+		if $notify-bg-job-success {
+			$history-end
+		} else {
+			$history-end &
+		}
 	}
 }]
 
